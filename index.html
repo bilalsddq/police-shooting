@@ -1,22 +1,23 @@
 <!doctype html>
-
 <html>
-  <head>
+<head>
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/map.js"></script>
-    <title>Police Shootings</title>
+      <title>Police Shootings</title>
     <!-- Get the leaflet.js library and stylesheet -->
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link rel="stylesheet" href="css/main.css"/>
-  </head>
-
+</head>
+  <h1 id="title">Map of Armed and Unarmed Police Shootings</h1>
+    <h2>What this Map Shows?</h2>
+        <p>This map shows the crowdsourced police shootings data retrieved from <a href="https://docs.google.com/spreadsheets/d/1cEGQ3eAFKpFBVq1k2mZIy5mBPxC6nBTJHzuSWtZQSVw/edit#gid=1144428085">Deadspin Police Shooting Database</a> last fall. It shows the locations of police shootings for armed and unarmed people. Armed shootings are indicated by a red handgun icon, and unarmed shootings are indicated by a blue palm icon. The information also consists of the date, race, whether the person survived, and a summary of the incident.</p>
+    <h2>Why it is Important?</h3>
+        <p>This is some very sensitive information and it can be difficult to imagine where various police shootings can occur, so an interactive map can showcase a record of the shootings from a visual perspective.<p>
   <body>
-    <div id="container" style="width:500px; height:500px;"></div>
+<div id="container" style="width:500px; height:500px;"></div>
     <script>
-      
-    	// This is where you should execute your drawMap function // 
-
+        drawMap();
     </script>
   </body>
 </html>
