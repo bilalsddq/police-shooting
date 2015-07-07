@@ -1,91 +1,71 @@
 // Function to draw your map
-var drawMap() = function() {
+var drawMap = function() {
+// Create map and set viewd
+	var map = L.map('container');
+	map.setView([47.739, -122.331], 10);
 
-  // Create map and set viewd 
- var map = L.map('container')
- map.setView([47.739, -122.331], 4);
+	// Create a tile layer variable using the appropriate url
+  	var layer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
+	// Add the layer to your map
+	layer.addTo(map);
 
-  // Create an tile layer variable using the appropriate url
-var layer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png')
-})
-  // Add the layer to your map
- layer.addTo(map);
+	//Execute your function to get data
+	getData(map);
+}
 
-  // Execute your function to get data
-  getData.addTo(map);
-
-// Function for getting data
-var getData = function() {
+ // Function for getting data
+var getData = function(map) {
 
   // Execute an AJAX request to get the data in data/response.js
  var data;
  $.ajax({
- 	local: 'data/response.json'
+ 	url:'data/response.json',
  	type: "get",
  	success:function(dat) {
  		data = dat
+ 		customBuild(data, map);
 
- 		data.map(function(d) {
- 			var circle = new L.circle([d.latitude, d.longitude], 200, {color: 'red', opacity:.5}).addTo(map)
- 		})
  	},
- datatype:"json"
-}}
-  // When your request is successful, call your customBuild function
-customBuild.addTo(map);
+ 	dataType: "json"
+ })
 
+ // When your request is successful, call your customBuild function
+}
 
 // Do something creative with the data here!  
-var customBuild = function() {
-var marker = L.marker(47.739, -122.331]).addTo(map);
+var customBuild = function(dataSet, map) {
+	dataSet.map(function(d) {
+	console.log(d)
+	var marker = L.marker([47.739, -122.331]).addTo(map); 
 
-var circle = L.circle([47.739, -122.331], 200, {
-	color: 'blue',
+
+var circle = L.circle([d.lat, d.lng], 350, {
+	color: 'red',
 	fillColor: '#f03',
 	fillOpacity:0.5,
 }).addTo(map)
-
+})
+	
 var polygon = L.polygon([
-	[47.740, -122.329],
-	[47.733, -122.327],
-	[47.718, -122.311]
+	[47.762320, -122.205403],
+	[47.7717, -122.2044],
+	[47.610377, -122.200679],
+	[47.606209, -122.332071], 
+	[47.755653, -122.341518],
+
 ]).addTo(map);
 
-var popup = L.popup()
-	.setLatLng([47.739, -122.331])
-	.setContent("Police Shootings Closest to my neighborhood")
-	.openON(map);
-
+var popup = L.popup();
 
 function onMapClick(e) {
 	popup
 		.setLatLng(e.latlng)
-		.setContent("you clicked the map at " + e.latlng.toString())
+		.setContent("Police shootings closest to my city.")
 		.openOn(map);
 }
 
-map.on('click', onMapClick);
+map.on('click', onMapClick).addTo(map);
 
-var year = L.tileLayer(mapboxUrl, {id: 'bilalsdq', attribution: mapboxAttribution}),
-	outcome = L.tileLayer(mapboxUrl, {id: 'bilalsdq', attribution: mapboxAttribution});
-
-	var map = L.map('map', {
-		center: [39.73, -104.99],
-		zoom: 10,
-		layers: [year, outcome]
-	});
-
-var baseMaps = {
-	"Year": year,
-	"Outcome": outcome
-};
-
-var overlayMaps = {
-	"Race": race
-};
-
-L.control.layers(baseMaps, overlayMaps).addTo(map);
-  
 }
 
 
