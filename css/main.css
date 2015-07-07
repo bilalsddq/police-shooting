@@ -1,1 +1,11 @@
 /* You'll probably want to add some styles here */
+
+map {
+	height: 180px;
+	width: 300px;
+}
+
+#circle {
+	color: #f03;
+	opacity: 0.8;
+}
